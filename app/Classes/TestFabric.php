@@ -26,7 +26,10 @@ class TestFabric
      */
     public function doTest($data): Void
     {
-        $this->test(new FeedbackFactoryDb(), $data);
-        $this->test(new FeedbackFactoryFile(), $data);
+        if ($data['saveTo'] === 'file') {
+            $this->test(new FeedbackFactoryFile(), $data);
+        } elseif ($data['saveTo'] === 'database') {
+            $this->test(new FeedbackFactoryDb(), $data);
+        }
     }
 }
